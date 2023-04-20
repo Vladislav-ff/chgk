@@ -1,0 +1,33 @@
+html, body {
+    height: 95%;
+    /*border: 1px solid red;*/
+
+    /*padding: 0;*/
+    /*margin: 0;*/
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+    /*border: 1px solid black;*/
+}
+
+h1 {
+    font-family: 'Lucida Sans, Arial, sans-serif';
+    color: gray;
+    margin: 0;
+    padding: 0;
+}
+
+.highcharts-figure {
+    height: 100%;
+    /*border: 1px solid orange;*/
+}
+
+a, a:visited {
+    color: cornflowerblue;
+}
+
+li { /* see https://stackoverflow.com/a/19254449/8534088 */
+    margin: 10px 0;
+}
