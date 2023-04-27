@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title>Кубок 90-летия Физического факультета по «Что? Где? Когда?» графики</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body>
+<h1>
+    Кубок 90-летия Физического факультета по «Что? Где? Когда?» &mdash; III отборочный этап.    
+
+
+    
+    &nbsp;
+    
+</h1>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <div style="position: fixed; bottom: 0; left: 5px;">
+      <a href="https://vk.com/kii_ff" target="_blank">
+        <img src="img/vk.svg" width="30px;" height="30px;" alt="Группа в ВК"/>
+      </a>
+    </div>
+    <!--
+        <p class="highcharts-description">
+            Сумма взятых вопросов после каждого вопроса.
+        </p>
+    -->
+</figure>
+
+<script>
+    const teamsData = [ {
+        "id" : 1,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 1,
+        "totalCorrectAnswers" : [ 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 6, 7, 7, 8, 8, 8, 9, 10,11,12,12,12 ]
+    }, {
+        "id" : 2,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 1,
+        "totalCorrectAnswers" : [ 0,0,0,0,1,1,2,3,4,4,5,5,5,6,7,8,8,9,10,10,10,11,12,12,13,14,15,16,17,17,18,18,19,20,20,20 ]
+    }, {
+        "id" : 3,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 1,
+        "totalCorrectAnswers" : [ 0,0,0,0,1,1,2,3,3,4,4,4,4,5,6,6,6,7,8,8,8,8,8,8,9,10,10,10,11,11,12,13,14,15,16,17]
+    }, {
+        "id" : 4,
+        "name" : "какая-то команда",
+        "city" : "Москва",        
+        "totalCorrectAnswers" : [ 1,1,2,2,3,4,4,5,5,6,7,8,9,10,10,11,11,12,13,14,14,15,16,16,17,18,19,20,21,21,22,22,23,24,25,26]
+    }, {
+        "id" : 5,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 1,
+        "totalCorrectAnswers" : [ 1,1,1,1,2,2,3,4,4,5,5,5,5,6,7,8,8,9,10,10,10,11,11,11,12,13,14,14,15,15,15,15,16,17,17,17 ]
+    }, {
+        "id" : 6,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 20,
+        "totalCorrectAnswers" : [ 0,1,1,1,2,2,2,3,3,3,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,7,7,7,8,8,9,10,11,12,12,12]
+    }, {
+        "id" : 7,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 10,
+        "totalCorrectAnswers" : [ 0,0,0,0,1,2,2,3,3,4,4,5,6,6,6,6,6,6,7,8,8,8,8,8,9,10,11,12,13,13,14,15,16,17,18,19]
+    }, {
+        "id" : 8,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 19,
+        "totalCorrectAnswers" : [ 1,1,2,2,3,4,4,5,6,6,7,7,8,9,10,10,10,11,12,12,12,13,13,13,14,15,16,16,17,17,18,19,20,21,21,22]
+    }, {
+        "id" : 9,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 15,
+        "totalCorrectAnswers" : [ 0,1,2,2,3,3,3,4,4,4,4,4,4,4,4,5,5,6,7,8,8,9,9,9,10,11,11,12,13,13,14,15,16,17,17,17 ]
+    }, {
+        "id" : 10,
+        "name" : "какая-то команда",
+        "city" : "Москва",
+        "tournamentNumber" : 27,
+        "totalCorrectAnswers" : [ 0,0,0,0,1,2,3,4,4,4,4,4,4,5,5,6,6,7,7,8,8,9,9,9,10,11,11,12,13,13,14,15,16,17,17,17]
+    },]
+
+    const questionNumbers = [];
+    for (let i = 1; i <= 72; i++) {
+        questionNumbers.push(i)
+    }
+
+    const visibleTeamNames = [
+        "какая-то команда",
+        "какая-то команда",
+        "какая-то команда",
+        "какая-то команда",
+        "какая-то команда",
+        "какая-то команда",
+        "какая-то команда",
+        "какая-то команда",
+        "какая-то команда",
+        "какая-то команда"
+    ];
+
+    const tours = [{"number":1,"editor":"Тур 1","questionsCount":12,"from":1,"to":12},{"number":2,"editor":"Тур 2","questionsCount":12,"from":13,"to":24},{"number":3,"editor":"Тур 3","questionsCount":13,"from":25,"to":36}];
+    const series = [];
+    teamsData.forEach(function(item) {
+        series.push({
+            name: item.name,
+            data: item.totalCorrectAnswers,
+            visible: visibleTeamNames.includes(item.name) // hide most of the teams by default to be not super-slow
+        });
+    });
+
+    let plotBands = [];
+    tours.forEach(function(tour, index) {
+        let color = (index % 2 === 0) ? 'rgba(200, 200, 200, 0.1)' : 'rgba(68, 170, 213, 0.1)';
+
+        plotBands.push({
+            from: tour.from - 1.5,
+            to: tour.to - 0.5,
+            color: color,
+            label: {
+                text: tour.editor,
+                style: {
+                    color: '#606060'
+                }
+            }
+        })
+    });
+
+    Highcharts.chart('container', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Сумма взятых вопросов'
+        },
+        /*
+                subtitle: {
+                    text: 'Source: ' +
+                        '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
+                        'target="_blank">Wikipedia.com</a>'
+                },
+        */
+        xAxis: {
+            categories: questionNumbers,
+            plotBands: plotBands
+        },
+        yAxis: {
+            title: {
+                text: 'Взято вопросов'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: false
+                },
+                enableMouseTracking: true
+            }
+        },
+        series: series
+    });
+</script>
+
+</body>
+</html>
