@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title>Осенний Кубок физического факультета по «Что? Где? Когда?», приуроченный к 70-летию Профкома студентов ФФ и 90-летию Физического факультета</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body>
+<h1>
+    Осенний Кубок физического факультета по «Что? Где? Когда?», приуроченный к 70-летию Профкома студентов ФФ и 90-летию Физического факультета. 
+
+
+    
+    &nbsp;
+    
+</h1>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <div style="position: fixed; bottom: 0; left: 5px;">
+      <a href="https://vk.com/kii_ff" target="_blank">
+        <img src="img/vk.svg" width="30px;" height="30px;" alt="Группа в ВК"/>
+      </a>
+    </div>
+    <!--
+        <p class="highcharts-description">
+            Сумма взятых вопросов после каждого вопроса.
+        </p>
+    -->
+</figure>
+
+<script>
+    const teamsData = "заполнить
+
+    const questionNumbers = [];
+    for (let i = 1; i <= 72; i++) {
+        questionNumbers.push(i)
+    }
+
+    const visibleTeamNames = ["заполнить];
+
+    const tours = [{"number":1,"editor":"Тур 1","questionsCount":12,"from":1,"to":12},{"number":2,"editor":"Тур 2","questionsCount":12,"from":13,"to":24},{"number":3,"editor":"Тур 3","questionsCount":13,"from":25,"to":36}];
+    const series = [];
+    teamsData.forEach(function(item) {
+        series.push({
+            name: item.name,
+            data: item.totalCorrectAnswers,
+            visible: visibleTeamNames.includes(item.name) // hide most of the teams by default to be not super-slow
+        });
+    });
+
+    let plotBands = [];
+    tours.forEach(function(tour, index) {
+        let color = (index % 2 === 0) ? 'rgba(200, 200, 200, 0.1)' : 'rgba(68, 170, 213, 0.1)';
+
+        plotBands.push({
+            from: tour.from - 1.5,
+            to: tour.to - 0.5,
+            color: color,
+            label: {
+                text: tour.editor,
+                style: {
+                    color: '#606060'
+                }
+            }
+        })
+    });
+
+    Highcharts.chart('container', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Сумма взятых вопросов'
+        },
+        /*
+                subtitle: {
+                    text: 'Source: ' +
+                        '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
+                        'target="_blank">Wikipedia.com</a>'
+                },
+        */
+        xAxis: {
+            categories: questionNumbers,
+            plotBands: plotBands
+        },
+        yAxis: {
+            title: {
+                text: 'Взято вопросов'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: false
+                },
+                enableMouseTracking: true
+            }
+        },
+        series: series
+    });
+</script>
+
+</body>
+</html>
